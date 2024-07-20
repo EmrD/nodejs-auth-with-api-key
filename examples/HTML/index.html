@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key Test</title>
+</head>
+<body>
+    <h1>API Key Test</h1>
+    <form id="api-key-form">
+        <label for="api-key">API Key:</label>
+        <input type="text" id="api-key" name="api-key" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('api-key-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const apiKey = document.getElementById('api-key').value;
+            const responseDiv = document.getElementById('response');
+
+            fetch('https://nodejs-auth-with-api-key.vercel.app/api/data', {
+                method: 'GET',
+                headers: {
+                    'x-api-key': apiKey
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                responseDiv.textContent = JSON.stringify(data);
+            })
+            .catch(error => {
+                responseDiv.textContent = 'Error: ' + error;
+            });
+        });
+    </script>
+</body>
+</html>
