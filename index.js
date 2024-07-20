@@ -8,7 +8,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // CORS ayarlarını uyguluyoruz
-app.use(cors({ origin: true }));
+app.use(cors({
+  origin: '*',
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type,Authorization,x-api-key'
+}));
 
 const apiKeyMiddleware = (req, res, next) => {
   const apiKey = req.get('x-api-key');
