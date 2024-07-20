@@ -1,13 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import cors from 'cors'
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
-const cors = require("cors");
-app.use(cors({ origin: true }));
 const PORT = process.env.PORT || 3000;
+
+// CORS ayarlarını uyguluyoruz
+app.use(cors({ origin: true }));
 
 const apiKeyMiddleware = (req, res, next) => {
   const apiKey = req.get('x-api-key');
