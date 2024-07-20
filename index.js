@@ -7,7 +7,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// CORS ayarlarını uyguluyoruz
 app.use(cors({
   origin: '*',
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
