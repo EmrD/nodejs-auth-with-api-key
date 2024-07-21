@@ -7,17 +7,20 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// CORS ayarlarını uyguluyoruz
 app.use(cors({
   origin: '*',
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
   allowedHeaders: 'Content-Type,Authorization,x-api-key'
 }));
 
+// İzin verilen API anahtarlarını bir dizi içinde tanımlıyoruz
+const validApiKeys = process.env.API_KEYS.split(',');
+
 const apiKeyMiddleware = (req, res, next) => {
   const apiKey = req.get('x-api-key');
-  const validApiKey = process.env.API_KEY;
-
-  if (apiKey && apiKey === validApiKey) {
+  
+  if (apiKey && validApiKeys.includes(apiKey)) {
     next();
   } else {
     res.status(403).json({ error: 'Forbidden: Invalid API Key' });
