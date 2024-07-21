@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 dotenv.config();
+console.log(process.env.API_KEYS);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
