@@ -3,19 +3,17 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 dotenv.config();
-console.log(process.env.API_KEYS);
+console.log(process.env.API_KEYS); //log api keys to analyze
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// CORS ayarlarını uyguluyoruz
 app.use(cors({
   origin: '*',
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
   allowedHeaders: 'Content-Type,Authorization,x-api-key'
 }));
 
-// İzin verilen API anahtarlarını bir dizi içinde tanımlıyoruz
 const validApiKeys = process.env.API_KEYS ? process.env.API_KEYS.split(',') : [];
 
 const apiKeyMiddleware = (req, res, next) => {
