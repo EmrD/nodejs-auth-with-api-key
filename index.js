@@ -20,7 +20,7 @@ const validApiKeys = process.env.API_KEYS ? process.env.API_KEYS.split(',') : []
 
 const apiKeyMiddleware = (req, res, next) => {
   const apiKey = req.get('x-api-key');
-  
+
   if (apiKey && validApiKeys.includes(apiKey)) {
     next();
   } else {
